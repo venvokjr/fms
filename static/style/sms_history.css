@@ -1,0 +1,132 @@
+:root {
+    --primary-color: #198754;
+    --secondary-color: #146c43;
+    --glass-color: rgba(255, 255, 255, 0.2);
+}
+
+body {
+    background: linear-gradient(-45deg, #f8f9fa, #e9ecef, #dee2e6, #f8f9fa);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Stats Dashboard */
+.stats-dashboard {
+    background: var(--glass-color);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 10px 0;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.stat-icon {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+}
+
+.info-tooltip {
+    cursor: pointer;
+    color: var(--secondary-color);
+    margin-left: 5px;
+}
+
+/* SMS Cards (existing styles) */
+.sms-card {
+    background: var(--glass-color);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border-left: 5px solid var(--primary-color);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.sms-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.sms-header {
+    background: rgba(25, 135, 84, 0.1);
+    padding: 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.sms-body {
+    padding: 15px;
+}
+
+.sms-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.sms-count-badge {
+    background: var(--primary-color);
+    color: white;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.time-badge {
+    background: rgba(0,0,0,0.05);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 12px;
+}
+
+.search-container {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.search-container i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+}
+
+.search-container input {
+    padding-left: 40px;
+    background: rgba(255,255,255,0.8);
+}

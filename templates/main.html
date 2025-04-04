@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Dashboard</title>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/static/assets/fav.ico"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link href="/static/style/main.css" rel="stylesheet">
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'sw', includedLanguages: 'en,sw,fr,ro,de,pt,es'},
+                'google_translate_container'
+            );
+        }
+
+        function changeLanguage(languageCode) {
+            let select = document.querySelector(".goog-te-combo");
+            if (select) {
+                select.value = languageCode;
+                select.dispatchEvent(new Event("change"));
+            }
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <style>
+        /* Style for the language dropdown */
+        #language-dropdown {
+            padding: 8px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Completely hide the Google Translate widget */
+        #google_translate_container {
+            display: none;
+        }
+
+        /* Remove the Google Translate bar at the top */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        /* Hide the white empty bar */
+        body {
+            top: 0px !important;
+        }
+
+        /* Hide Google Translate popup */
+        body > .skiptranslate {
+            display: none !important;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="spiner-body" style="display: flex;align-items: center;justify-content: center;height: 100vh;flex-direction: column;">
+        <div class="spinner-container">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <img src="/static/assets/logo.png" class="logo-spinner" alt="FMSPoint Logo">
+        </div>
+        <div class="loading-text">Processing...</div>
+    </div>
+    
+    <div id="thebody" style="display: none;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
+            <div class="container">
+                <a class="navbar-brand fw-bold active d-flex align-items-center" href="/dashboard">
+                    <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                </a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/add_member_temp">
+                                <i class="bi bi-person-plus"></i> Ongeza Mchangiaji
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/record_temp">
+                                <i class="bi bi-pencil-square"></i> Record Muamala
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/access_temp">
+                                <i class="bi bi-list-check"></i> Angalia Miamala
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/sms_system">
+                                <i class="bi bi-chat-square-text"></i> SMS System
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="container text-center mt-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="/logout" class="btn btn-outline-danger">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </div>
+        
+                <div class="mt-4 d-flex flex-wrap justify-content-center gap-3">
+                    <button class="btn btn-premium" id="BtnMahesabu" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                        <i class="bi bi-calculator"></i> Onyesha Mahesabu
+                    </button> 
+                    
+                    <a href="/get_report" class="btn btn-premium">
+                        <i class="bi bi-file-earmark-bar-graph"></i> Get Report
+                    </a>
+                </div>
+                <select id="language-dropdown" onchange="changeLanguage(this.value)">
+                    <option value="">🌍Select language</option>
+                    <option value="sw">Swahili</option>
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                    <option value="fr">French</option>
+                    <option value="ro">Romanian</option>
+                    <option value="de">German</option>
+                    <option value="pt">Portuguese</option>
+                </select>
+            
+                <!-- Hidden Google Translate Widget -->
+                <div style="display: none;" id="google_translate_container"></div>
+            </div>   
+        
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                <div class="text-center" id="spiner-mahesabu" style="margin-top: 35vh;">
+                    <div class="spinner-border text-success" role="status" style="height: 5rem; width: 5rem;"></div>
+                    <div style="margin-top: 3vh;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color: hsl(109, 79%, 35%);font-size: 15px;font-weight: bold;">Tunapakua Mahesabu tafadhali subiri...</div>
+                </div>
+                <div id="summaryote">
+                    <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel" style="font-family: Arial, Helvetica, sans-serif; color: hsl(193, 89%, 42%);">SUMMARY YA MAHESABU YOTE</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+
+                    <div class="offcanvas-body" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+                        <div>
+                            <div class="card-text" id="totalDebt"></div>
+                            <div class="card-text" id="totalPaid"></div>
+                            <div class="card-text" id="totalAdditional"></div>
+                            <div class="card-text" id="totalMoney"></div>
+                            <div class="card-text" id="maelezo"></div>
+                            <div class="card-text" style="color: red;" id="totalError"></div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            
+            <div id="alertBox" class="alert alert-dismissible fade show d-none" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            
+            <h2 class="my-4 text-center">Fundraising Records</h2>
+            
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input type="text" id="searchMember" class="form-control" placeholder="Tafuta jina la mchangiaji kwa kuandika majina yake">
+                </div>
+            </div>
+
+            <div id="sortContainer" class="d-flex justify-content-between align-items-center mb-3">
+                <div class="container" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold;" id="userAmount">
+                    Idadi ya Watu: <span id="memberCount">0</span>
+                </div>
+                
+                <div class="dropdown">
+                    <button class="btn btn-premium dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-sort-down"></i> Badili Mpangilio
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">  <!-- Added dropdown-menu-end here -->
+                        <li><button class="dropdown-item" onclick="loadMembers('AK')">Ahadi Kubwa</button></li>
+                        <li><button class="dropdown-item" onclick="loadMembers('CK')">Cash Kubwa</button></li>
+                        <li><button class="dropdown-item" onclick="loadMembers('DK')">Deni Kubwa</button></li>
+                        <li><button class="dropdown-item" onclick="loadMembers('AN')">Ahadi Ndogo</button></li>
+                        <li><button class="dropdown-item" onclick="loadMembers('CN')">Cash Ndogo</button></li>
+                        <li><button class="dropdown-item" onclick="loadMembers('DN')">Deni dogo</button></li>
+                        <li><button class="dropdown-item" onclick="loadMembers('AA')">Alphabeti (A->Z)</button></li>
+                        <li><button class="dropdown-item" onclick="loadMembers('AZ')">Alphabeti (Z->A)</button></li>
+                        <li><button class="dropdown-item" onclick="loadMembers('default')">Kawaida</button></li>
+                    </ul>
+                </div>
+            </div> 
+
+            <div class="container mt-4">
+                <div class="table-container">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped table-bordered align-middle">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th><i class="bi bi-person"></i> Jina</th>
+                                    <th><i class="bi bi-telephone"></i> Namba</th>
+                                    <th><i class="bi bi-cash-stack"></i> Ahadi ya Mwanzo</th>
+                                    <th><i class="bi bi-currency-exchange"></i> Kiasi Alicholipa</th>
+                                    <th><i class="bi bi-exclamation-triangle"></i> Kiasi Anachodaiwa</th>
+                                    <th><i class="bi bi-pencil-square"></i> Edit Info</th>
+                                </tr>
+                            </thead>
+                            <tbody id="memberTable">
+                                <!-- Table content will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EDIT USER INFO MODAL -->
+            <div class="modal fade" id="makeEdits" tabindex="-1" aria-labelledby="makeEditsLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="makeEditsLabel">Rekebisha Taarifa Ya Mchangiaji</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editUserInfo">
+                                <div id="alertBoxUser" class="alert alert-dismissible fade show d-none" role="alert">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <div class="mb-1">
+                                    <label for="edit-name" class="col-form-label">Jina la Mchangiaji:</label>
+                                    <input type="text" class="form-control" id="edit-name" autocomplete="off">
+                                </div>
+                                <div class="mb-1">
+                                    <label for="edit-phone" class="col-form-label">Namba za Mchangiaji:</label>
+                                    <input type="tel" class="form-control" id="edit-phone" autocomplete="off">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-target="#deleteUser" data-bs-toggle="modal">Mfute</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary" onclick="commitChange(event)">Rekebisha</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DELETE USER MODAL -->
+            <div class="modal fade" id="deleteUser" tabindex="-1" aria-labelledby="deleteUserLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="deleteUserLabel">Futa Mchangiaji</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-1">
+                                    Unauwakika unataka kumfuta <label style="color: green;" id="jinalake"></label> kwenye mfumo wa Uchangishaji <br><br>
+                                    <p style="color: red;">⚠️⚠️Hatua hii hairudishiki nyuma,
+                                    Ukishamfuta taarifa zake zote ikiwemo michango yake yote ya ahadi na cash itaondolewa kwenye mfumo wetu
+                                    Tafadhali uwe na uhakika na unachokifanya</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Usimfute</button>
+                                    <button type="submit" class="btn btn-danger" onclick="deleteUser()">Mfute</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Wait for translation to be applied, then remove the white bar
+        window.addEventListener("load", function() {
+            setTimeout(function() {
+                document.querySelector(".goog-te-banner-frame")?.remove();
+                document.body.style.top = "0px";
+            }, 500);
+        });
+    </script>
+    <script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

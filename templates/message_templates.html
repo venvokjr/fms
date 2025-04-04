@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hariri Ujumbe wa Kiolezo | FMSPoint</title>
+    <link rel="icon" type="image/x-icon" href="/static/assets/fav.ico"> 
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/static/style/sms_templates.css">
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'sw', includedLanguages: 'en,sw,fr,ro,de,pt,es'},
+                'google_translate_container'
+            );
+        }
+
+        function changeLanguage(languageCode) {
+            let select = document.querySelector(".goog-te-combo");
+            if (select) {
+                select.value = languageCode;
+                select.dispatchEvent(new Event("change"));
+            }
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <style>
+        /* Style for the language dropdown */
+        #language-dropdown {
+            padding: 8px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Completely hide the Google Translate widget */
+        #google_translate_container {
+            display: none;
+        }
+
+        /* Remove the Google Translate bar at the top */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        /* Hide the white empty bar */
+        body {
+            top: 0px !important;
+        }
+
+        /* Hide Google Translate popup */
+        body > .skiptranslate {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="/dashboard">
+                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add_member_temp">
+                            <i class="bi bi-person-plus"></i> Ongeza Mchangiaji
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/record_temp">
+                            <i class="bi bi-pencil-square"></i> Record Muamala
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/access_temp">
+                            <i class="bi bi-list-check"></i> Angalia Miamala
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sms_system">
+                            <i class="bi bi-chat-square-text"></i> SMS System
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container py-4">
+        <select id="language-dropdown" onchange="changeLanguage(this.value)">
+            <option value="">🌍Select language</option>
+            <option value="sw">Swahili</option>
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="ro">Romanian</option>
+            <option value="de">German</option>
+            <option value="pt">Portuguese</option>
+        </select>
+        <div style="display: none;" id="google_translate_container"></div>
+        <h2 class="text-center mb-4"><i class="bi bi-pencil-square me-2"></i>📝 Badilisha Ujumbe wa Kiolezo</h2>
+        
+        <div class="alert alert-info" role="alert">
+            <div class="mb-3">
+                <h3><i class="bi bi-info-circle me-2"></i>JINSI YA KUVITUMIA VISHIKA NAFASI 📝</h3>
+                <p>
+                    Vishika nafasi ni sehemu maalum kwenye ujumbe ambazo mfumo wetu hujazwa <span class="variable-tag">moja kwa moja</span> kulingana na taarifa za mchagiaji.
+                    Hii inamaanisha hutahitaji kuandika majina, kiasi cha mchango, au taarifa zingine kila mara – mfumo unafanya yote kwa ajili yako!
+                </p>
+            
+                <h4><i class="bi bi-lightbulb me-2"></i>🔹 Mfano wa ujumbe</h4>
+                <p><strong>Kabla ya kujazwa:</strong></p>
+                <div class="alert alert-secondary">
+                    Shalom <span class="variable-tag">{name}</span>, tumepokea mchango wako wa <span class="variable-tag">{amount:,}</span> kwa ajili ya <span class="variable-tag">{person}</span>. Mungu akubariki sana.
+                </div>
+                <p><strong>Baada ya kujazwa na mfumo:</strong></div>
+                <div class="alert alert-success">
+                    Shalom <strong>Elizabeth John</strong>, tumepokea mchango wako wa <strong>100,000</strong> kwa ajili ya <strong>Henry Clement</strong>. Mungu akubariki sana.
+                </div>
+            
+                <h4><i class="bi bi-tags me-2"></i>📌 Maelezo ya Vishika Nafasi</h4>
+                <ul class="mb-3">
+                    <li><span class="variable-tag">{name}</span> – Mfumo utaweka jina la mchangiaji, mfano: <i>Elizabeth John</i></li>
+                    <li><span class="variable-tag">{payment_type}</span> – Mfumo utaweka aina ya mchango, kama ni <i>cash</i> au <i>ahadi</i></li>
+                    <li><span class="variable-tag">{amount:,}</span> – Mfumo utaweka kiasi kilicholipwa, mfano: <i>100,000</i></li>
+                    <li><span class="variable-tag">{person}</span> – Mfumo utaweka jina la anayechangiwa, mfano: <i>John Lungato</i></li>
+                    <li><span class="variable-tag">{cash:,}</span> – Mfumo utaweka fedha taslimu iliyolipwa, mfano: <i>30,000</i></li>
+                    <li><span class="variable-tag">{ahadi:,}</span> – Mfumo utaweka ahadi iliyotolewa, mfano: <i>50,000</i></li>
+                    <li><span class="variable-tag">{total:,}</span> – Mfumo utaweka jumla ya mchango (taslimu + ahadi), mfano: <i>80,000</i></li>
+                </ul>
+            
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle me-2"></i><b>MUHIMU:</b> Usibadilishe majina ya vishika nafasi (mfano, usiandike <span class="variable-tag">{jina}</span> badala ya <span class="variable-tag">{name}</span>).
+                    Mfumo utashindwa kutuma ujumbe kwa usahihi!
+                </div>
+            </div>
+        </div>
+
+        <!-- New SMS Count Explanation -->
+        <div class="alert alert-primary mb-4">
+            <h4><i class="bi bi-chat-left-text me-2"></i>HESABU YA SMS</h4>
+            <p>
+                <strong>1 SMS = Herufi 160</strong><br>
+                Mfumo wa SMS hutumia mahesabu yafuatayo:
+            </p>
+            <ul>
+                <li>Ujumbe wenye herufi 1-160 = SMS 1</li>
+                <li>Ujumbe wenye herufi 161-320 = SMS 2</li>
+                <li>Ujumbe wenye herufi 321-480 = SMS 3</li>
+                <li>Na kadhalika...</li>
+            </ul>
+            <p class="mb-0">
+                <i class="bi bi-info-circle me-1"></i> <b>Kumbuka:</b> Herufi zote (pamoja na nafasi, alama za uakifishaji, na vishika nafasi) zinahesabiwa kwa jumla ya SMS.
+            </p>
+        </div>
+
+        <form id="templateForm">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <label class="form-label fw-bold"><i class="bi bi-exclamation-circle me-2"></i>Ujumbe anaotumiwa mchangiaji aliyepunguza ahadi yake lakini bado anadaiwa</label>
+                    <textarea id="bado_anadaiwa" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            
+            <div class="card mb-3">
+                <div class="card-body">
+                    <label class="form-label fw-bold"><i class="bi bi-check-circle me-2"></i>Ujumbe anaotumiwa mchangiaji aliyefanikiwa kumalizia ahadi yote alioahidi (Amelipa Deni Lote)</label>
+                    <textarea id="amelipa_yote" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            
+            <div class="card mb-3">
+                <div class="card-body">
+                    <label class="form-label fw-bold"><i class="bi bi-cash-coin me-2"></i>Ujumbe anaotumiwa mchangiaji aliyetoa fedha taslimu tu</label>
+                    <textarea id="fedha_taslimu" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            
+            <div class="card mb-3">
+                <div class="card-body">
+                    <label class="form-label fw-bold"><i class="bi bi-file-earmark-text me-2"></i>Ujumbe anaotumiwa mchangiaji aliyetoa ahadi tu</label>
+                    <textarea id="ahadi_tu" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            
+            <div class="card mb-3">
+                <div class="card-body">
+                    <label class="form-label fw-bold"><i class="bi bi-wallet2 me-2"></i>Ujumbe anaotumiwa mchangiaji aliyetoa fedha taslimu pamoja na ahadi</label>
+                    <textarea id="fedha_na_ahadi" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <label class="form-label fw-bold"><i class="bi bi-bell me-2"></i>Ujumbe anaotumiwa mchangiaji kukumbushwa deni lake</label>
+                    <textarea id="kumbusha_deni" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-premium w-100 py-2"><i class="bi bi-save me-2"></i>Hifadhi Mabadiliko</button>
+        </form>
+    </div>
+    <script>
+        // Wait for translation to be applied, then remove the white bar
+        window.addEventListener("load", function() {
+            setTimeout(function() {
+                document.querySelector(".goog-te-banner-frame")?.remove();
+                document.body.style.top = "0px";
+            }, 500);
+        });
+    </script>
+    
+    <script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/message_templates.js"></script>
+</body>
+</html>

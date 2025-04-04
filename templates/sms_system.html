@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/static/style/system_sms.css">
+    <link rel="icon" type="image/x-icon" href="/static/assets/fav.ico"> 
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'sw', includedLanguages: 'en,sw,fr,ro,de,pt,es'},
+                'google_translate_container'
+            );
+        }
+
+        function changeLanguage(languageCode) {
+            let select = document.querySelector(".goog-te-combo");
+            if (select) {
+                select.value = languageCode;
+                select.dispatchEvent(new Event("change"));
+            }
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <style>
+        /* Style for the language dropdown */
+        #language-dropdown {
+            padding: 8px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Completely hide the Google Translate widget */
+        #google_translate_container {
+            display: none;
+        }
+
+        /* Remove the Google Translate bar at the top */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        /* Hide the white empty bar */
+        body {
+            top: 0px !important;
+        }
+
+        /* Hide Google Translate popup */
+        body > .skiptranslate {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="/dashboard">
+                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+            </a>
+            
+            <!-- Toggler Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add_member_temp">
+                            <i class="bi bi-person-plus"></i> Ongeza Mchangiaji
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/record_temp">
+                            <i class="bi bi-pencil-square"></i> Record Muamala
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/access_temp">
+                            <i class="bi bi-list-check"></i> Angalia Miamala
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/sms_system">
+                            <i class="bi bi-chat-square-text"></i> SMS System
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container py-5">
+        <select id="language-dropdown" onchange="changeLanguage(this.value)">
+            <option value="">🌍Select language</option>
+            <option value="sw">Swahili</option>
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="ro">Romanian</option>
+            <option value="de">German</option>
+            <option value="pt">Portuguese</option>
+        </select>
+    
+        <!-- Hidden Google Translate Widget -->
+        <div style="display: none;" id="google_translate_container"></div>
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold header-text"><i class="bi bi-chat-square-text"></i> SMS System</h1>
+            <p class="lead text-muted">Simamia mawasiliano yako yote ya SMS katika sehemu moja</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <!-- Tuma SMS Card -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 card-premium">
+                    <div class="card-body text-center p-4 p-md-5">
+                        <div class="feature-icon">
+                            <i class="bi bi-send"></i>
+                        </div>
+                        <h3 class="card-title fw-bold">Kumbusha Wadaiwa</h3>
+                        <p class="card-text text-muted">Tuma ujumbe wa SMS kwa watu binafsi au vikundi kukumbushia ahadi zao.</p>
+                        <a href="/sms_sender" class="btn btn-premium text-white btn-lg mt-3 px-4">
+                            <i class="bi bi-arrow-right"></i> Fungua Mfumo wa Ukumbushaji
+                        </a>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Message Templates Card -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 card-premium">
+                    <div class="card-body text-center p-4 p-md-5">
+                        <div class="feature-icon">
+                            <i class="bi bi-file-earmark-text"></i>
+                        </div>
+                        <h3 class="card-title fw-bold">Kiolezo cha Message</h3>
+                        <p class="card-text text-muted">Unda, Simamia na upange violezo vyako ya namna SMS zinatakavyotumwa kwa wachangiaji wako.</p>
+                        <a href="/message_templates" class="btn btn-premium text-white btn-lg mt-3 px-4">
+                            <i class="bi bi-arrow-right"></i> Badili Kiolezo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- SMS History Card (New Card) -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 card-premium">
+                    <div class="card-body text-center p-4 p-md-5">
+                        <div class="feature-icon">
+                            <i class="bi bi-clock-history"></i>
+                        </div>
+                        <h3 class="card-title fw-bold">Historia ya SMS</h3>
+                        <p class="card-text text-muted">Angalia rekodi zote za ujumbe uliotuma, hali ya uwasilishaji na salio la SMS.</p>
+                        <a href="/sms_history" class="btn btn-premium text-white btn-lg mt-3 px-4">
+                            <i class="bi bi-arrow-right"></i> Angalia Historia
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        // Wait for translation to be applied, then remove the white bar
+        window.addEventListener("load", function() {
+            setTimeout(function() {
+                document.querySelector(".goog-te-banner-frame")?.remove();
+                document.body.style.top = "0px";
+            }, 500);
+        });
+    </script>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="/static/js/sms_system.js"></script>
+</body>
+</html>

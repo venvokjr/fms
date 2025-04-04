@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FMSPoint Admin Control</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="icon" type="image/x-icon" href="/static/assets/fav.ico"> 
+    <link rel="stylesheet" href="/static/style/admin.css">
+</head>
+<body>
+    <div id="spiner-body" style="display: flex;align-items: center;justify-content: center;height: 100vh;flex-direction: column;">
+        <div class="spinner-container">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <img src="/static/assets/logo.png" class="logo-spinner" alt="FMSPoint Logo">
+        </div>
+        <div class="loading-text">Processing...</div>
+    </div>
+
+    <div id="therest">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark admin-nav shadow">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="#">
+                    <i class="bi bi-shield-lock me-2"></i>FMSPoint Admin
+                </a>
+                <div class="d-flex">
+                    <span class="badge bg-light text-dark me-2" id="lastUpdated"></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="container-fluid py-4">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-md-3">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-success text-white">
+                            <i class="bi bi-menu-button me-2"></i>Controls
+                        </div>
+                        <div class="list-group list-group-flush" id="navTabs">
+                            <a href="#users" class="list-group-item list-group-item-action active" data-bs-toggle="tab">
+                                <i class="bi bi-people me-2"></i>Users & SMS
+                            </a>
+                            <a href="/admin/sender_ids" class="list-group-item list-group-item-action">
+                                <i class="bi bi-chat-square-text me-2"></i>Sender IDs
+                            </a>
+                            <a href="#blocking" class="list-group-item list-group-item-action" data-bs-toggle="tab">
+                                <i class="bi bi-person-x me-2"></i>Block Users
+                            </a>
+                            <a href="#licenses" class="list-group-item list-group-item-action" data-bs-toggle="tab">
+                                <i class="bi bi-key me-2"></i>Licenses
+                            </a>
+                            <a href="#database" class="list-group-item list-group-item-action" data-bs-toggle="tab">
+                                <i class="bi bi-database me-2"></i>DB Tools
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Panel -->
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <!-- SMS Balance Overview -->
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="card shadow-sm text-center">
+                                <div class="card-header bg-success text-white">
+                                    <i class="bi bi-envelope-fill me-2"></i>Total SMS Balance
+                                </div>
+                                <div class="card-body">
+                                    <h4 id="totalSMS">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card shadow-sm text-center">
+                                <div class="card-header bg-primary text-white">
+                                    <i class="bi bi-envelope-open me-2"></i>Bought SMS
+                                </div>
+                                <div class="card-body">
+                                    <h4 id="usedSMS">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card shadow-sm text-center">
+                                <div class="card-header bg-warning text-dark">
+                                    <i class="bi bi-envelope-dash me-2"></i>Unbought SMS
+                                </div>
+                                <div class="card-body">
+                                    <h4 id="unusedSMS">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="tab-pane fade show active" id="users">
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0"><i class="bi bi-people me-2"></i>User Management</h5>
+                                    <div class="input-group" style="width: 300px;">
+                                        <input type="text" class="form-control" placeholder="Search users..." id="userSearch">
+                                        <button class="btn btn-outline-success" type="button">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Username</th>
+                                                    <th>Full Name</th>
+                                                    <th>SMS Balance</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="userTableBody">
+                                                <!-- Loaded via JavaScript -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Block Users Tab -->
+                        <div class="tab-pane fade" id="blocking">
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header bg-white">
+                                    <h5 class="mb-0"><i class="bi bi-person-x me-2"></i>User Status Control</h5>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Username</th>
+                                                <th>Status</th>
+                                                <th>Last Active</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="blockTableBody">
+                                            <!-- Loaded via JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- License Management Tab -->
+                        <div class="tab-pane fade" id="licenses">
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header bg-white">
+                                    <h5 class="mb-0"><i class="bi bi-key me-2"></i>License Management</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <input type="number" class="form-control" id="licenseQuantity" value="1" min="1">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button class="btn btn-success" id="generateLicenseBtn">
+                                                <i class="bi bi-plus-circle"></i> Generate Licenses
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>License Code</th>
+                                                    <th>Status</th>
+                                                    <th>Used By</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="licenseTableBody">
+                                                <!-- Loaded via JavaScript -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Database Tools Tab -->
+                        <div class="tab-pane fade" id="database">
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header bg-white">
+                                    <h5 class="mb-0"><i class="bi bi-database me-2"></i>Database Tools</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <select class="form-select" id="dbUserSelect">
+                                                <!-- Loaded via JavaScript -->
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <select class="form-select" id="dbCollectionSelect">
+                                                <option value="">Select Collection</option>
+                                                <option value="message_templates">Message Templates</option>
+                                                <option value="sms_info">SMS Info</option>
+                                                <option value="stored_messages">Stored Messages</option>
+                                                <option value="transactions">Transactions</option>
+                                                <option value="wanakamati">Wanakamati</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <button class="btn btn-outline-success w-100 mb-2" id="exportCollectionBtn">
+                                                <i class="bi bi-download"></i> Export Collection
+                                            </button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="file" id="collectionImportFile" class="d-none" accept=".json" />
+                                            <button id="importCollectionBtn" class="btn btn-primary">
+                                                <i class="bi bi-upload"></i> Import Collection
+                                            </button>
+                                            <div id="importError" class="text-danger mt-2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+        <div id="toastAlert" class="toast align-items-center text-white bg-success border-0" role="alert">
+          <div class="d-flex">
+            <div class="toast-body" id="toastAlertMessage">Success!</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+          </div>
+        </div>
+    </div>
+      
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/admin.js"></script>
+</body>
+</html>

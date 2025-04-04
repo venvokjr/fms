@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ongeza Mchangiaji | FMSPoint</title>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="icon" type="image/x-icon" href="/static/assets/fav.ico"> 
+    <link rel="stylesheet" href="/static/style/add.css">
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'sw', includedLanguages: 'en,sw,fr,ro,de,pt,es'},
+                'google_translate_container'
+            );
+        }
+
+        function changeLanguage(languageCode) {
+            let select = document.querySelector(".goog-te-combo");
+            if (select) {
+                select.value = languageCode;
+                select.dispatchEvent(new Event("change"));
+            }
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <style>
+        /* Style for the language dropdown */
+        #language-dropdown {
+            padding: 8px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Completely hide the Google Translate widget */
+        #google_translate_container {
+            display: none;
+        }
+
+        /* Remove the Google Translate bar at the top */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        /* Hide the white empty bar */
+        body {
+            top: 0px !important;
+        }
+
+        /* Hide Google Translate popup */
+        body > .skiptranslate {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="/dashboard">
+                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/add_member_temp">
+                            <i class="bi bi-person-plus"></i> Ongeza Mchangiaji
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/record_temp">
+                            <i class="bi bi-pencil-square"></i> Record Muamala
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/access_temp">
+                            <i class="bi bi-list-check"></i> Angalia Miamala
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sms_system">
+                            <i class="bi bi-chat-square-text"></i> SMS System
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <select id="language-dropdown" onchange="changeLanguage(this.value)">
+            <option value="">🌍Select language</option>
+            <option value="sw">Swahili</option>
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="ro">Romanian</option>
+            <option value="de">German</option>
+            <option value="pt">Portuguese</option>
+        </select>
+        <div style="display: none;" id="google_translate_container"></div>
+        <div class="form-container">
+            <h2 class="text-center mb-4"><i class="bi bi-person-plus me-2"></i>Ongeza Mchangiaji</h2>
+            
+            <div id="alertBox" class="alert alert-dismissible fade show d-none" role="alert">   
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            
+            <form id="memberForm" class="needs-validation" novalidate>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="Full Name" autocomplete="off" required>
+                    <label for="name"><i class="bi bi-person me-2"></i>Jina Kamili</label>
+                    <div class="invalid-feedback">Tafadhali jaza jina la Mchangiaji.</div>
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <input type="tel" class="form-control" id="phone" placeholder="Mobile Number" autocomplete="off">
+                    <label for="phone"><i class="bi bi-telephone me-2"></i>Namba za Simu</label>
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="promise_amount" placeholder="Kiasi" autocomplete="off" required>
+                    <label for="amount"><i class="bi bi-cash-stack me-2"></i>Kiasi cha Ahadi</label>
+                    <div class="invalid-feedback">Tafadhali weka kiwango sahihi cha fedha.</div>
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="cash_amount" placeholder="Kiasi" autocomplete="off" required>
+                    <label for="amount"><i class="bi bi-currency-exchange me-2"></i>Kiasi cha Fedha Taslimu</label>
+                    <div class="invalid-feedback">Tafadhali weka kiwango sahihi cha fedha.</div>
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="date">
+                    <label for="date"><i class="bi bi-calendar me-2"></i>Tarehe ya Muamala</label>
+                    <div class="invalid-feedback">Tafadhali weka tarehe ya Muamala.</div>
+                </div>
+                
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="sms">
+                    <label for="sms"><i class="bi bi-chat-square-text me-2"></i>Bonyeza hapa ili kumtaarifu Mchangiaji kwa njia ya SMS kuwa muamala wake umepokelewa</label>
+                </div>
+                
+                <div id="SIT" class="mb-3 mt-3 d-none">
+                    <label for="senderIdTable"><i class="bi bi-chat-left-text me-2"></i>Chagua Kitambulisho cha SMS: </label>
+                    <select id="senderIdTable" class="form-select"> 
+                        <!-- Options will be loaded here -->
+                    </select>
+                </div>
+
+                <button id="kusanya" type="submit" class="btn btn-premium w-100">
+                    <i class="bi bi-save me-2"></i>Kusanya
+                </button>
+            </form>
+        </div>
+    </div>
+
+        <!-- Modal -->
+    <div class="modal fade" id="smsModal" tabindex="-1" aria-labelledby="smsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="smsModalLabel"><i class="bi bi-chat-left-text me-2"></i>HESABU YA SMS</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <p>
+                <strong>1 SMS = Herufi 160</strong><br>
+                Mfumo wa SMS hutumia mahesabu yafuatayo:
+            </p>
+            <ul>
+                <li>Ujumbe wenye herufi 1-160 = SMS 1</li>
+                <li>Ujumbe wenye herufi 161-320 = SMS 2</li>
+                <li>Ujumbe wenye herufi 321-480 = SMS 3</li>
+                <li>Na kadhalika...</li>
+            </ul>
+            <p class="mb-0">
+                <i class="bi bi-info-circle me-1"></i> <b>Kumbuka:</b> Herufi zote (pamoja na nafasi, alama za uakifishaji, na vishika nafasi) zinahesabiwa kwa jumla ya SMS hivyo kama unahisi Ujumbe utakuwa mrefu unaweza kubadilisha kiolezo cha ujumbe kwenye button hapa chini na kupunguza idadi ya maneno <a href="/message_templates" style="
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #28a745;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                font-weight: bold;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                margin: 10px 0;
+                border: none;
+                text-align: center;
+                font-size: 16px;
+            ">
+                <i class="bi bi-pencil-square" style="margin-right: 8px;"></i>Bonyeza hapa kubadili kiolezo (template)
+            </a>.
+            </p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Nimeelewa</button>
+            </div>
+            
+        </div>
+        </div>
+    </div>
+    <script>
+        // Wait for translation to be applied, then remove the white bar
+        window.addEventListener("load", function() {
+            setTimeout(function() {
+                document.querySelector(".goog-te-banner-frame")?.remove();
+                document.body.style.top = "0px";
+            }, 500);
+        });
+    </script>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+        <div id="toastAlert" class="toast align-items-center text-white bg-success border-0" role="alert">
+          <div class="d-flex">
+            <div class="toast-body" id="toastAlertMessage">Success!</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+          </div>
+        </div>
+    </div>
+
+    <script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/add.js"></script>
+</body>
+</html>

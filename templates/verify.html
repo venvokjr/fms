@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Code - FMSPOINT</title>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/static/assets/mylogo.ico">
+    <link rel="icon" type="image/x-icon" href="/static/assets/fav.ico"> 
+    <style>
+        /* Base styles remain the same */
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .verify-container {
+            max-width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            transition: all 0.5s ease;
+        }
+        
+        /* Celebration Modal */
+        .celebration-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        
+        .celebration-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .celebration-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .success-icon {
+            font-size: 80px;
+            color: #28a745;
+            margin-bottom: 20px;
+            animation: bounce 1s ease infinite;
+        }
+        
+        .celebration-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+        
+        .redirect-text {
+            color: #6c757d;
+            margin-top: 20px;
+        }
+        
+        /* Animations */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes float-up {
+            to { transform: translateY(-100vh) rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Floating balloons */
+        .balloon {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            border-radius: 50%;
+            bottom: -100px;
+            z-index: 1;
+            animation: float-up 8s ease-in forwards;
+        }
+        .code-input {
+            font-size: 24px;
+            text-align: center;
+            letter-spacing: 8px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        
+        .balloon:before {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 40px;
+            background: #333;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .celebration-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .celebration-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 5px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #28a745;
+            width: 0%;
+            transition: width 5s linear;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="verify-container">
+        <div id="alertBox" class="alert alert-dismissible fade show d-none" role="alert">   
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="title">Enter Verification Code</div>
+        <p class="text-muted">We have sent a code to your email. Enter it below to verify your account.</p>
+        <input type="text" class="form-control code-input" id="code" maxlength="6" placeholder="------" autocomplete="off">
+        <button class="btn btn-primary mt-3" type="submit" onclick="Verify()">Verify</button>
+        <div class="resend mt-3"></div>
+    </div>
+
+    <div class="celebration-modal" id="celebrationModal">
+        <div class="celebration-content">
+            <div class="success-icon">✓</div>
+            <h2 class="celebration-text">Account Created Successfully!</h2>
+            <p>You'll be redirected to login shortly</p>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/verify.js"></script>
+</body>
+</html>

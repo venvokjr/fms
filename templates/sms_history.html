@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS History | FMSPoint</title>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/static/style/sms_history.css">
+    <link rel="icon" type="image/x-icon" href="/static/assets/fav.ico"> 
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'sw', includedLanguages: 'en,sw,fr,ro,de,pt,es'},
+                'google_translate_container'
+            );
+        }
+
+        function changeLanguage(languageCode) {
+            let select = document.querySelector(".goog-te-combo");
+            if (select) {
+                select.value = languageCode;
+                select.dispatchEvent(new Event("change"));
+            }
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <style>
+        /* Style for the language dropdown */
+        #language-dropdown {
+            padding: 8px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Completely hide the Google Translate widget */
+        #google_translate_container {
+            display: none;
+        }
+
+        /* Remove the Google Translate bar at the top */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        /* Hide the white empty bar */
+        body {
+            top: 0px !important;
+        }
+
+        /* Hide Google Translate popup */
+        body > .skiptranslate {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="/dashboard">
+                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add_member_temp">
+                            <i class="bi bi-person-plus"></i> Ongeza Mchangiaji
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/record_temp">
+                            <i class="bi bi-pencil-square"></i> Record Muamala
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/access_temp">
+                            <i class="bi bi-list-check"></i> Angalia Miamala
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sms_system">
+                            <i class="bi bi-chat-square-text"></i> SMS System
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container py-4">
+        <select id="language-dropdown" onchange="changeLanguage(this.value)">
+            <option value="">🌍Select language</option>
+            <option value="sw">Swahili</option>
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="ro">Romanian</option>
+            <option value="de">German</option>
+            <option value="pt">Portuguese</option>
+        </select>
+    
+        <!-- Hidden Google Translate Widget -->
+        <div style="display: none;" id="google_translate_container"></div>
+        <h2 class="text-center mb-4"><i class="bi bi-chat-square-text me-2"></i>Historia ya Ujumbe</h2>
+        
+        <div class="stats-dashboard">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="bi bi-wallet2"></i></div>
+                        <div class="stat-value" id="balance">0</div>
+                        <div class="stat-label">
+                            Salio la SMS 
+                            <i class="bi bi-info-circle info-tooltip" 
+                               data-bs-toggle="tooltip" 
+                               title="Salio la SMS lililobaki kwenye mfumo"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="bi bi-send"></i></div>
+                        <div class="stat-value" id="sent-sms">0</div>
+                        <div class="stat-label">
+                            SMS Zilizotumwa
+                            <i class="bi bi-info-circle info-tooltip" 
+                               data-bs-toggle="tooltip" 
+                               title="Idadi ya SMS zilizotumwa (1 SMS = herufi 160)"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="bi bi-check-circle"></i></div>
+                        <div class="stat-value" id="delivered-sms">0</div>
+                        <div class="stat-label">
+                            SMS Zilizofika
+                            <i class="bi bi-info-circle info-tooltip" 
+                               data-bs-toggle="tooltip" 
+                               title="Idadi ya ujumbe uliofika kwa wapokeaji (1 ujumbe kwa kila mpokeaji)"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-3 text-center">
+                <small class="text-muted">
+                    <i class="bi bi-info-circle me-1"></i>
+                    <strong>Maelezo:</strong> 
+                    SMS Count inategemea urefu wa ujumbe (herufi 160 = SMS 1). 
+                    SMS Zilizofika ni idadi ya watu walipokea ujumbe.
+                </small>
+            </div>
+        </div>
+               
+        <div class="search-container">
+            <i class="bi bi-search"></i>
+            <input type="text" id="searchSMS" class="form-control" placeholder="Tafuta ujumbe...">
+        </div>
+        
+        <!--
+        <div class="filter-buttons mb-4">
+            <button class="btn btn-outline-success btn-sm active" data-filter="all">Yote</button>
+            <button class="btn btn-outline-success btn-sm" data-filter="today">Leo</button>
+            <button class="btn btn-outline-success btn-sm" data-filter="week">Wiki hii</button>
+            <button class="btn btn-outline-success btn-sm" data-filter="month">Mwezi huu</button>
+        </div>
+        -->
+
+        <div id="smsContainer">
+            <!-- SMS cards will be dynamically inserted here -->
+            <div class="text-center py-5" id="loadingIndicator">
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SMS Card Template (Hidden) -->
+    <template id="smsCardTemplate">
+        <div class="sms-card">
+            <div class="sms-header d-flex justify-content-between align-items-center">
+                <div>
+                    <strong class="receiver-name"></strong>
+                    <div class="receiver-phone text-muted small"></div>
+                </div>
+                <div class="sms-count-badge sms-count"></div>
+            </div>
+            <div class="sms-body">
+                <div class="message-content mb-2"></div>
+                <div class="sms-meta">
+                    <div class="time-badge">
+                        <span class="send-date"></span> 
+                        <span class="send-time"></span>
+                    </div>
+                    <div>
+                        <span class="message-id small text-muted"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script>
+        // Wait for translation to be applied, then remove the white bar
+        window.addEventListener("load", function() {
+            setTimeout(function() {
+                document.querySelector(".goog-te-banner-frame")?.remove();
+                document.body.style.top = "0px";
+            }, 500);
+        });
+    </script>
+
+    <script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/sms_history.js"></script>
+
+</body>
+</html>
